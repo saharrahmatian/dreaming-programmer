@@ -3,7 +3,7 @@ package com.tosan.springcourse.batch;
 import java.util.Date;
 
 /**
- * @author Abouei
+ * @author Sahar Rahmatian
  */
 public class Log {
     private Date date;
