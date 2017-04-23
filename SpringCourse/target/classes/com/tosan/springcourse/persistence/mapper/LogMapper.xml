@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tosan.springcourse.persistence.mapper.LogMapper">
+
+    <resultMap id="logMap" type="com.tosan.springcourse.batch.Log">
+        <constructor>
+            <arg column="dat" javaType="Date"/>
+            <arg column="opr" javaType="String"/>
+            <arg column="usr" javaType="String"/>
+            <arg column="ip" javaType="String"/>
+        </constructor>
+    </resultMap>
+
+    <insert id="saveLogs"
+            parameterType="com.tosan.springcourse.batch.Log">
+        insert into tbl_log (dat, opr, usr, ip)
+        <foreach item="element" collection="logs" index="index" separator=" UNION ALL ">
+            select
+            #{element.date},
+            #{element.operation},
+            #{element.user},
+            #{element.ip}
+            from dual
+        </foreach>
+    </insert>
+
+    <select id="reportLogsByDate" resultMap="logMap">
+        select dat, opr, usr, ip from tbl_log where dat = #{date}
+    </select>
+
+    <select id="reportLogsByUser" resultMap="logMap">
+        select dat, opr, usr, ip from tbl_log where usr = #{user}
+    </select>
+
+</mapper>
