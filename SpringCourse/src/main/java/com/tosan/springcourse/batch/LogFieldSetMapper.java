@@ -5,7 +5,7 @@ import org.springframework.batch.item.file.transform.FieldSet;
 import org.springframework.validation.BindException;
 
 /**
- * @author Abouei
+ * @author Sahar Rahmatian
  */
 public class LogFieldSetMapper implements FieldSetMapper<Log> {
     public Log mapFieldSet(FieldSet fieldSet) throws BindException {
